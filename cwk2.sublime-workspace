@@ -1,0 +1,286 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"q6_m",
+				"q6_move_down"
+			],
+			[
+				"q6",
+				"q6_move_down"
+			],
+			[
+				"che",
+				"check_path"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "-- Language Engineering\n-- Denotational Semantics\n-- CWK2p1\n\n-- Type Definitions (Given)\n\ntype Var = String\ntype Z = Integer\ntype T = Bool\ntype State = Var -> Z\n\ndata Aexp = N Integer\n			| V Var | Add Aexp Aexp | Mult Aexp Aexp | Sub Aexp Aexp deriving (Show)\ndata Bexp = TRUE | FALSE | Eq Aexp Aexp | Le Aexp Aexp | Neg Bexp | And Bexp Bexp deriving (Show)\ndata Stm  = Ass Var Aexp | Skip | Comp Stm Stm | If Bexp Stm Stm | While Bexp Stm deriving (Show)\n\n-- Semantic Functions (To Do)\n\n{-\n\nfv_aexp :: Aexp -> [Var] \nfv_bexp :: Bexp -> [Var]\n\nsubst_aexp :: Aexp -> Var -> Aexp -> Aexp\nsubst_bexp :: Bexp -> Var -> Aexp -> Bexp\n\na_val :: Aexp -> State -> Z\nb_val :: Bexp -> State -> T\n\n-}",
+			"file": "cwk2p1.hs",
+			"file_size": 685,
+			"file_write_time": 130732393418522573,
+			"settings":
+			{
+				"buffer_size": 688,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 179,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 412.0,
+		"selected_items":
+		[
+		],
+		"width": 412.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/assignment1/assignment1.pl",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/assignment1/library/assignment1_library.pl",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/ailp_assigment1_40662.pl",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/ailp/web/test.html",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/ailp/command_channel.pl",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/ailp/web/resources/js/CommandChannel.js",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/ailp/web/mower.html",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/assignment1/ailp_assigment1_40662.pl",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/ailp.pl",
+		"/home/ugrads/coms2010/nc0565/linux/.bashrc",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/assignment1.pl"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"8006",
+			"8004",
+			"8000",
+			"soc",
+			"socket",
+			"8001",
+			"80001",
+			"8000",
+			"p(1, 1)",
+			"S,",
+			"q6_move_up",
+			"Y",
+			"X",
+			"q6_move_left",
+			"start_position",
+			"0",
+			" S",
+			"S",
+			"url",
+			"brow",
+			"fire"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"8006"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "cwk2p1.hs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 688,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								187,
+								187
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Haskell/Haskell.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 179,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								176,
+								176
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "cwk2",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"co",
+				"ailp/web/resources/js/CommandChannel.js"
+			],
+			[
+				"comm",
+				"ailp/command_channel.pl"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 113.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
