@@ -48,13 +48,15 @@ a_val (Sub  a1 a2) s = (a_val a1 s) - (a_val a2 s)
 
 
 b_val :: Bexp -> State -> T
-b_val T s = T
+b_val TRUE s = True
+b_val FALSE s = False
 b_val (Eq a1 a2) s
-        | (b_val a1 s) == (b_val a2 s) = TRUE
-        | otherwise = FALSE
+        | (a_val a1 s) == (a_val a2 s) = True
+        | otherwise = False
 b_val (Le a1 a2) s
-        | (b_val a1 s) <= (b_val a2 s) = TRUE
-        | otherwise = FALSE
+        | (a_val a1 s) <= (a_val a2 s) = True
+        | otherwise = False
         -- (a1)s > (a2 s)
 b_val (Neg b1) s = not (b_val b1 s)
-b_val (And b1 b2) s = liftA2 (&&) (b_val b1) (b_val b2)
+b_val (And b1 b2) s = (b_val b1 s) && (b_val b2 s)
+--b_val (And b1 b2) s = liftA2 (&&) (b_val b1 s) (b_val b2 s)
