@@ -4,6 +4,7 @@
 
 -- Type Definitions (Given)
 import Control.Applicative
+import Data.List
 
 type Var = String
 type Z = Integer
@@ -31,10 +32,23 @@ data Stm  = Ass Var Aexp
 
 -- Semantic Functions (To Do)
 
+-- Could change pattern the generalise operators
 
+fv_aexp :: Aexp -> [Var] 
+fv_aexp (N n) = []
+fv_aexp (V x) = [x]
+fv_aexp (Add a1 a2) = (fv_aexp a1) `union` (fv_aexp a2)
+fv_aexp (Mult a1 a2) = (fv_aexp a1) `union` (fv_aexp a2)
+fv_aexp (Sub a1 a2) = (fv_aexp a1) `union` (fv_aexp a2)
 
---fv_aexp :: Aexp -> [Var] 
---fv_bexp :: Bexp -> [Var]
+fv_bexp :: Bexp -> [Var]
+fv_bexp TRUE  = []
+fv_bexp FALSE = []
+fv_bexp (Eq a1 a2) = (fv_aexp a1) `union` (fv_aexp a2)
+fv_bexp (Le a1 a2) = (fv_aexp a1) `union` (fv_aexp a2)
+fv_bexp (Neg b1) = fv_bexp b1
+fv_bexp (And b1 b2) = (fv_bexp b1) `union` (fv_bexp b2)
+
 
 --subst_aexp :: Aexp -> Var -> Aexp -> Aexp
 --subst_bexp :: Bexp -> Var -> Aexp -> Bexp
