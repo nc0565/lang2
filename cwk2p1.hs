@@ -44,14 +44,28 @@ fv_aexp (Sub a1 a2) = (fv_aexp a1) `union` (fv_aexp a2)
 fv_bexp :: Bexp -> [Var]
 fv_bexp TRUE  = []
 fv_bexp FALSE = []
-fv_bexp (Eq a1 a2) = (fv_aexp a1) `union` (fv_aexp a2)
-fv_bexp (Le a1 a2) = (fv_aexp a1) `union` (fv_aexp a2)
-fv_bexp (Neg b1) = fv_bexp b1
+fv_bexp (Eq a1 a2)  = (fv_aexp a1) `union` (fv_aexp a2)
+fv_bexp (Le a1 a2)  = (fv_aexp a1) `union` (fv_aexp a2)
+fv_bexp (Neg b1)    = fv_bexp b1
 fv_bexp (And b1 b2) = (fv_bexp b1) `union` (fv_bexp b2)
 
+subst_aexp :: Aexp -> Var -> Aexp -> Aexp
+subst_aexp (N n) _ _ = (N n)
+subst_aexp (V v) x sub
+        | v == x = sub
+        | otherwise = (V v)
+subst_aexp (Add  a1 a2) x sub = Add (subst_aexp a1 x sub) (subst_aexp a2 x sub)
+subst_aexp (Mult a1 a2) x sub = Mult (subst_aexp a1 x sub) (subst_aexp a2 x sub)
+subst_aexp (Sub  a1 a2) x sub = Sub (subst_aexp a1 x sub) (subst_aexp a2 x sub)
 
---subst_aexp :: Aexp -> Var -> Aexp -> Aexp
---subst_bexp :: Bexp -> Var -> Aexp -> Bexp
+subst_bexp :: Bexp -> Var -> Aexp -> Bexp
+subst_bexp TRUE _ _  = TRUE
+subst_bexp FALSE _ _ = FALSE
+subst_bexp (Eq a1 a2) x sub  = Eq (subst_aexp a1 x sub) (subst_aexp a2 x sub)
+-- Check
+subst_bexp (Neg b1) x sub    = Neg (subst_bexp b1 x sub)
+subst_bexp (And b1 b2) x sub = And (subst_bexp b1 x sub) (subst_bexp b2 x sub)
+
     
 a_val :: Aexp -> State -> Z
 a_val (N i) s = i

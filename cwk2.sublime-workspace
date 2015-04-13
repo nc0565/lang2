@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"Le",
+				"Le"
+			],
+			[
+				"fv",
+				"fv_bexp"
+			],
+			[
+				"b",
+				"b_val"
+			],
+			[
+				"fa",
+				"FALSE"
+			],
+			[
 				"q6_m",
 				"q6_move_down"
 			],
@@ -20,21 +36,10 @@
 	"buffers":
 	[
 		{
-			"contents": "-- Language Engineering\n-- Denotational Semantics\n-- CWK2p1\n\n-- Type Definitions (Given)\n\ntype Var = String\ntype Z = Integer\ntype T = Bool\ntype State = Var -> Z\n\ndata Aexp = N Integer\n			| V Var | Add Aexp Aexp | Mult Aexp Aexp | Sub Aexp Aexp deriving (Show)\ndata Bexp = TRUE | FALSE | Eq Aexp Aexp | Le Aexp Aexp | Neg Bexp | And Bexp Bexp deriving (Show)\ndata Stm  = Ass Var Aexp | Skip | Comp Stm Stm | If Bexp Stm Stm | While Bexp Stm deriving (Show)\n\n-- Semantic Functions (To Do)\n\n{-\n\nfv_aexp :: Aexp -> [Var] \nfv_bexp :: Bexp -> [Var]\n\nsubst_aexp :: Aexp -> Var -> Aexp -> Aexp\nsubst_bexp :: Bexp -> Var -> Aexp -> Bexp\n\na_val :: Aexp -> State -> Z\nb_val :: Bexp -> State -> T\n\n-}",
 			"file": "cwk2p1.hs",
-			"file_size": 685,
-			"file_write_time": 130732393418522573,
 			"settings":
 			{
-				"buffer_size": 688,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-			"settings":
-			{
-				"buffer_size": 179,
+				"buffer_size": 1978,
 				"line_ending": "Unix"
 			}
 		}
@@ -66,8 +71,9 @@
 	},
 	"file_history":
 	[
-		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/lang2/cwk2",
 		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/assignment1/assignment1.pl",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/assignment1/library/assignment1_library.pl",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/ailp_assigment1_40662.pl",
@@ -97,6 +103,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Add",
+			"a",
+			"comp",
+			"b_val",
+			"State",
+			"Z",
+			"|",
+			"	",
 			"8006",
 			"8004",
 			"8000",
@@ -125,6 +139,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"    ",
 			"8006"
 		],
 		"reverse": false,
@@ -136,7 +151,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -145,15 +160,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 688,
+						"buffer_size": 1978,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								187,
-								187
+								709,
+								709
 							]
 						],
 						"settings":
@@ -161,35 +176,7 @@
 							"syntax": "Packages/Haskell/Haskell.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 179,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								176,
-								176
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 209.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
