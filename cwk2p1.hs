@@ -65,15 +65,13 @@ subst_bexp (Eq a1 a2) x sub  = Eq (subst_aexp a1 x sub) (subst_aexp a2 x sub)
 -- Check
 subst_bexp (Neg b1) x sub    = Neg (subst_bexp b1 x sub)
 subst_bexp (And b1 b2) x sub = And (subst_bexp b1 x sub) (subst_bexp b2 x sub)
-
-    
+   
 a_val :: Aexp -> State -> Z
 a_val (N i) s = i
 a_val (V x) s = s x
 a_val (Add  a1 a2) s = (a_val a1 s) + (a_val a2 s)
 a_val (Mult a1 a2) s = (a_val a1 s) * (a_val a2 s)
 a_val (Sub  a1 a2) s = (a_val a1 s) - (a_val a2 s)
-
 
 b_val :: Bexp -> State -> T
 b_val TRUE s = True
@@ -88,3 +86,41 @@ b_val (Le a1 a2) s
 b_val (Neg b1) s = not (b_val b1 s)
 b_val (And b1 b2) s = (b_val b1 s) && (b_val b2 s)
 --b_val (And b1 b2) s = liftA2 (&&) (b_val b1 s) (b_val b2 s)
+
+--cond :: (a->T, a->a, a->a) -> (a->a)
+
+--fix :: (a -> a) -> a
+
+s_ds :: Stm -> State -> State
+s_ds (Ass x a1) s = 
+s_ds Skip s = {-id-} s
+s_ds (Comp st1 st2) s =
+s_ds (If b1 st1 st2) s =
+--s_ds (If TRUE/True st1 st2) s =
+s_ds (While b1 st1) s =
+
+
+{- Tests
+ ===================================
+ let bob::State; bob _ = 4
+ b_val (Neg TRUE) bob
+ it = False
+
+b_val (And TRUE TRUE) bob
+it = True
+
+b_val (Eq (N 4) (Add (N 2) (N 2))) bob
+it = True
+
+b_val ( subst_bexp (Eq (N 4) (Add (N 2) (N 2))) "x" (N 4)) bob
+it = True
+
+b_val ( subst_bexp (Eq (N 4) (Add (N 2) (N 2))) ( head ( fv_aexp (V "x"))) (N 4)) bob
+it = True
+
+fv_bexp (Eq (N 2) (V "x"))
+it = ["x"]
+
+ b_val ( subst_bexp (Eq (N 4) (Add (N 2) (N 2))) ( head ( fv_bexp (Eq (N 2) (V "x")))) (N 4)) bob
+ it = True
+-}

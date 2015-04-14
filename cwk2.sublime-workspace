@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"Co",
+				"Comp"
+			],
+			[
+				"F",
+				"FALSE"
+			],
+			[
+				"Tru",
+				"TRUE"
+			],
+			[
 				"Le",
 				"Le"
 			],
@@ -39,7 +51,7 @@
 			"file": "cwk2p1.hs",
 			"settings":
 			{
-				"buffer_size": 1978,
+				"buffer_size": 3366,
 				"line_ending": "Unix"
 			}
 		}
@@ -160,15 +172,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1978,
+						"buffer_size": 3366,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								709,
-								709
+								2640,
+								2640
 							]
 						],
 						"settings":
@@ -176,7 +188,7 @@
 							"syntax": "Packages/Haskell/Haskell.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 209.0,
+						"translation.y": 430.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
