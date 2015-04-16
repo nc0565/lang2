@@ -51,8 +51,17 @@
 			"file": "cwk2p1.hs",
 			"settings":
 			{
-				"buffer_size": 3366,
+				"buffer_size": 3668,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "cwk2.hs",
+			"settings":
+			{
+				"buffer_size": 1810,
+				"line_ending": "Unix",
+				"name": "-- Language Engineering"
 			}
 		}
 	],
@@ -83,6 +92,7 @@
 	},
 	"file_history":
 	[
+		"/home/ugrads/coms2010/nc0565/linux/portfolio/lang2/cwk2p1.hs",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/lang2/cwk2",
 		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
@@ -163,7 +173,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -172,23 +182,54 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3366,
+						"buffer_size": 3668,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2640,
-								2640
+								0,
+								0
 							]
 						],
 						"settings":
 						{
+							"syntax": "Packages/Haskell/Haskell.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "cwk2.hs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1810,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1518,
+								1518
+							]
+						],
+						"settings":
+						{
+							"auto_name": "-- Language Engineering",
 							"syntax": "Packages/Haskell/Haskell.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 430.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

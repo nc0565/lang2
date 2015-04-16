@@ -87,17 +87,24 @@ b_val (Neg b1) s = not (b_val b1 s)
 b_val (And b1 b2) s = (b_val b1 s) && (b_val b2 s)
 --b_val (And b1 b2) s = liftA2 (&&) (b_val b1 s) (b_val b2 s)
 
---cond :: (a->T, a->a, a->a) -> (a->a)
+cond :: (a->T, a->a, a->a) -> (a->a)
+cond (p, st1, st2) s
+        | p s = (s_ds st1) s
+        | otherwise = (s_ds st2) s
 
---fix :: (a -> a) -> a
+fix :: (a -> a) -> a
+fix f = f (fix f)
 
 s_ds :: Stm -> State -> State
-s_ds (Ass x a1) s = 
-s_ds Skip s = {-id-} s
-s_ds (Comp st1 st2) s =
-s_ds (If b1 st1 st2) s =
---s_ds (If TRUE/True st1 st2) s =
-s_ds (While b1 st1) s =
+s_ds (Ass x a1) = /s y -> update (a_val a1 s) x
+        where update s z x y
+                | y == x = z
+                | otherwise = s y
+s_ds Skip = id
+s_ds (Comp st1 st2) = (s_ds st1) . (s_ds st2)
+s_ds (If b1 st1 st2) = cond ((b_val b1), (s_ds st1), (s_ds st2))
+s_ds (While b1 st1) = fix ff
+        where ff g = cond ((b_val b1), (g . s_ds st1), id)
 
 
 {- Tests
