@@ -59,7 +59,7 @@
 			"file": "cwk2.hs",
 			"settings":
 			{
-				"buffer_size": 1810,
+				"buffer_size": 2311,
 				"line_ending": "Unix",
 				"name": "-- Language Engineering"
 			}
@@ -125,6 +125,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"sto",
+			"Store",
 			"Add",
 			"a",
 			"comp",
@@ -189,8 +191,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								507,
+								507
 							]
 						],
 						"settings":
@@ -200,7 +202,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 915.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -212,15 +214,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1810,
+						"buffer_size": 2311,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1518,
-								1518
+								1496,
+								1496
 							]
 						],
 						"settings":
@@ -229,7 +231,7 @@
 							"syntax": "Packages/Haskell/Haskell.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 398.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

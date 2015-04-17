@@ -101,7 +101,7 @@ s_ds (Ass x a1) = /s y -> update (a_val a1 s) x
                 | y == x = z
                 | otherwise = s y
 s_ds Skip = id
-s_ds (Comp st1 st2) = (s_ds st1) . (s_ds st2)
+s_ds (Comp st1 st2) = (s_ds st2) . (s_ds st1)
 s_ds (If b1 st1 st2) = cond ((b_val b1), (s_ds st1), (s_ds st2))
 s_ds (While b1 st1) = fix ff
         where ff g = cond ((b_val b1), (g . s_ds st1), id)

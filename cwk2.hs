@@ -49,19 +49,61 @@ b_val (And b1 b2) s = (b_val b1 s) && (b_val b2 s)
 --b_val (And b1 b2) s = liftA2 (&&) (b_val b1 s) (b_val b2 s)
 
 cond :: (a->T, a->a, a->a) -> (a->a)
-cond (p, st1, st2) s
-        | p s = (s_ds st1) s
-        | otherwise = (s_ds st2) s
+cond (p, st1, st2) envv
+        | p envv = st1 envv
+        | otherwise = st2 envv
 
 fix :: (a -> a) -> a
 fix f = f (fix f)
 --fix f = let x = f x in x
 
+new :: Loc -> Loc
+new = succ
 
---new :: Loc -> Loc
---lookup :: EnvV -> Store -> State
+lookup :: EnvV -> Store -> State
+--lookup :: ("x"->4) -> (4->6) -> State
+lookup envv sto = sto . envv
+
 --update :: Eq a => (a->b) -> b -> a -> (a->b)
---s_ds' :: Stm -> EnvV -> Store -> Store
+--update str val loc
+--        | (loc ==)  = 
+--        | otherwise = str
+
+s_ds' :: Stm -> EnvV -> Store -> Store
+--s_ds' :: Stm -> (Var -> Loc) -> (Loc -> Z) -> (Loc -> Z)
+--s_ds' (Ass x a1) envv = sto'  lookup 
+        --where sto' = envv x
+s_ds' Skip envv = id
+s_ds' (Comp st1 st2) envv = (s_ds' st2 envv) . (s_ds' st1 envv)
+s_ds' (If b1 st1 st2) envv = cond ((b_val b1 lookup), (s_ds' st1 envv), (s_ds' st2 envv))
+
 --d_v_ds :: DecV -> (EnvV, Store) -> (EnvV, Store)    
 --d_p_ds :: DecP -> EnvV -> EnvP -> EnvP  
 --s_ds :: Stm -> EnvV -> EnvP -> Store -> Store
+
+
+
+
+{-Tests
+=====================================
+let test = s_ds' (Comp Skip Skip) bob
+let {bob::Var->Loc;bob "x" = 4}
+let {tim::Loc->Z;tim 4 = 6}
+
+(test tim) 4
+it = 6
+
+let {pred::Store->T;pred p = True}
+let{evv::Var->Loc;evv x = 2}
+let {st::Loc->Z;st 2 = 6;s _  =4 }
+let test = cond (pred, (s_ds' Skip evv), (s_ds' Skip evv)) $ st
+
+test 2
+6
+it :: Z
+
+let test = cond (pred, (s_ds' Skip evv), (s_ds' Skip evv)) st . evv
+test "x"
+6
+it :: Z
+-}
