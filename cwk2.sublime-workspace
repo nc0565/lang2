@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"St",
+				"Stm"
+			],
+			[
+				"l",
+				"lookup"
+			],
+			[
 				"Co",
 				"Comp"
 			],
@@ -59,7 +67,7 @@
 			"file": "cwk2.hs",
 			"settings":
 			{
-				"buffer_size": 2311,
+				"buffer_size": 3270,
 				"line_ending": "Unix",
 				"name": "-- Language Engineering"
 			}
@@ -68,17 +76,74 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 412.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"lint",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"",
+				"Build: Build"
+			],
+			[
+				"lintv",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"lint en",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"lint vi",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"key",
+				"Preferences: SublimeLinter Key Bindings – Default"
+			],
+			[
+				"togg",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"lint sett",
+				"Preferences: SublimeLinter Settings – Default"
+			],
+			[
+				"lint set",
+				"Preferences: SublimeLinter Settings – User"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
 		],
-		"width": 412.0
+		"width": 416.0
 	},
 	"console":
 	{
-		"height": 0.0,
+		"height": 139.0,
 		"history":
 		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
 		]
 	},
 	"distraction_free":
@@ -92,6 +157,11 @@
 	},
 	"file_history":
 	[
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/SublimeLinter/Default (Linux).sublime-keymap",
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/lang2/cwk2p1.hs",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/lang2/cwk2",
 		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
@@ -125,6 +195,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ctrl",
+			"up",
+			"},\n",
 			"sto",
 			"Store",
 			"Add",
@@ -191,18 +264,21 @@
 						"selection":
 						[
 							[
-								507,
-								507
+								1483,
+								1483
 							]
 						],
 						"settings":
 						{
+							"bs_sintax": "haskell",
+							"buffer_scroll_name": "37a85ffa",
+							"spell_check": false,
 							"syntax": "Packages/Haskell/Haskell.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 915.0,
+						"translation.y": 850.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -214,24 +290,27 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2311,
+						"buffer_size": 3270,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1496,
-								1496
+								2289,
+								2289
 							]
 						],
 						"settings":
 						{
 							"auto_name": "-- Language Engineering",
+							"bs_sintax": "haskell",
+							"buffer_scroll_name": "a03f3f76",
+							"spell_check": false,
 							"syntax": "Packages/Haskell/Haskell.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 398.0,
+						"translation.y": 724.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -271,6 +350,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
