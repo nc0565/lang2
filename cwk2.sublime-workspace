@@ -67,7 +67,7 @@
 			"file": "cwk2.hs",
 			"settings":
 			{
-				"buffer_size": 3270,
+				"buffer_size": 4130,
 				"line_ending": "Unix",
 				"name": "-- Language Engineering"
 			}
@@ -157,6 +157,8 @@
 	},
 	"file_history":
 	[
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
 		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/SublimeLinter/Default (Linux).sublime-keymap",
 		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
@@ -164,8 +166,6 @@
 		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/lang2/cwk2p1.hs",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/lang2/cwk2",
-		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/ugrads/coms2010/nc0565/linux/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/assignment1/assignment1.pl",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/assignment1/library/assignment1_library.pl",
 		"/home/ugrads/coms2010/nc0565/linux/portfolio/logic/asgm1/ailp_assigment1_40662.pl",
@@ -195,6 +195,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			";",
+			"start",
+			"down",
+			"chec",
+			"updat",
 			"ctrl",
 			"up",
 			"},\n",
@@ -264,8 +269,8 @@
 						"selection":
 						[
 							[
-								1483,
-								1483
+								2934,
+								2934
 							]
 						],
 						"settings":
@@ -278,7 +283,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 850.0,
+						"translation.y": 1513.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -290,15 +295,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3270,
+						"buffer_size": 4130,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2289,
-								2289
+								3067,
+								3067
 							]
 						],
 						"settings":
@@ -310,7 +315,7 @@
 							"syntax": "Packages/Haskell/Haskell.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 724.0,
+						"translation.y": 962.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

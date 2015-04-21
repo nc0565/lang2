@@ -8,7 +8,8 @@ import Prelude hiding (lookup)
 
 data Aexp = N Integer | V Var | Add Aexp Aexp | Mult Aexp Aexp | Sub Aexp Aexp
 data Bexp = TRUE | FALSE | Eq Aexp Aexp | Le Aexp Aexp | Neg Bexp | And Bexp Bexp
-data Stm  = Ass Var Aexp | Skip | Comp Stm Stm | If Bexp Stm Stm | While Bexp Stm | Block DecV DecP Stm | Call Pname
+data Stm  = Ass Var Aexp | Skip | Comp Stm Stm | If Bexp Stm Stm | While Bexp Stm | Block DecV DecP Stm
+        {-| Block DecV Stm -}| Call Pname
 
 type Var = String
 type Pname = String
@@ -79,10 +80,10 @@ lookup envv sto = sto . envv
 -- ******************************
 -- Only works with Eq b=>
 -- ******************************
-update :: Eq a => Eq b => (a->b) -> b -> a -> (a->b)
+update :: Eq a =>{- Eq b =>-} (a->b) -> b -> a -> (a->b)
 update f val x
-        | (f x) == val  = f
-        | otherwise = update'
+        {-| (f x) == val  = f
+        | otherwise-} = update'
                 where update' y
                         | y == x = val
                         | otherwise = f y
@@ -95,21 +96,32 @@ s_ds' (Comp st1 st2) envv = (s_ds' st2 envv) . (s_ds' st1 envv)
 s_ds' (If b1 st1 st2) envv = cond ((b_val b1 . lookup envv), (s_ds' st1 envv), (s_ds' st2 envv))
 s_ds' (While b1 st1) envv = fix ff
         where ff g = cond ((b_val b1 . lookup envv), (g . (s_ds' st1 envv)), id)
+--s_ds' (Block dv st1) envv = \sto -> s_ds' st1' envv' sto'
+        --where d_v_ds dv (envv, sto) = (envv', sto')
 
---d_v_ds :: DecV -> (EnvV, Store) -> (EnvV, Store)    
+--check if second arg should be PA?
+d_v_ds :: DecV -> (EnvV, Store) -> (EnvV, Store)    
+d_v_ds ((x, a1):dv') (envv, sto) = d_v_ds dv'((update envv l x), (update (update sto v l) (new next) next)) where
+        l = sto next
+        v = (a_val a1 (lookup envv sto))
+d_v_ds [] (envv, sto) = {-id-} (envv, sto)
+
+
 --d_p_ds :: DecP -> EnvV -> EnvP -> EnvP  
 --s_ds :: Stm -> EnvV -> EnvP -> Store -> Store
 
 
 evv::Var->Loc
-evv "x" = 1
-evv "h" = 4
+evv "x" = 0
+--evv "h" = 1
+--evv x   = (-1)-- Very important : (f x) in update cannot equal undefined
 
 st::Loc->Z
-st 1 = 5
-st 2 = 6
-st 4  = 10
+st 0 = 1 -- Very importan for Testing
+--st 1 = 5
+--st _ =  -1
 
+bob = d_v_ds [("a",(N 8))] (evv, st)
 
 {-Tests
 =====================================
