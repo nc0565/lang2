@@ -89,15 +89,14 @@ update f val x
                         | otherwise = f y
 
 s_ds' :: Stm -> EnvV -> Store -> Store
---s_ds' :: Stm -> (Var -> Loc) -> (Loc -> Z) -> (Loc -> Z)
 s_ds' (Ass x a1) envv = \sto -> update sto (a_val a1 (lookup envv sto)) (envv x)
 s_ds' Skip envv = id
 s_ds' (Comp st1 st2) envv = (s_ds' st2 envv) . (s_ds' st1 envv)
 s_ds' (If b1 st1 st2) envv = cond ((b_val b1 . lookup envv), (s_ds' st1 envv), (s_ds' st2 envv))
-s_ds' (While b1 st1) envv = fix ff
-        where ff g = cond ((b_val b1 . lookup envv), (g . (s_ds' st1 envv)), id)
---s_ds' (Block dv st1) envv = \sto -> s_ds' st1' envv' sto'
-        --where d_v_ds dv (envv, sto) = (envv', sto')
+s_ds' (While b1 st1) envv = fix ff where
+        ff g = cond ((b_val b1 . lookup envv), (g . (s_ds' st1 envv)), id)
+--s_ds' (Block dv st1) envv = \sto -> s_ds' st1' envv' sto' where 
+        --d_v_ds dv (envv, sto) = (envv', sto')
 
 --check if second arg should be PA?
 d_v_ds :: DecV -> (EnvV, Store) -> (EnvV, Store)    
@@ -106,22 +105,37 @@ d_v_ds ((x, a1):dv') (envv, sto) = d_v_ds dv'((update envv l x), (update (update
         v = (a_val a1 (lookup envv sto))
 d_v_ds [] (envv, sto) = {-id-} (envv, sto)
 
+d_p_ds :: DecP -> EnvV -> EnvP -> EnvP
+d_p_ds ((pn, st1):dp') envv envp = d_p_ds dp' envv (update envp g pn) where
+        g = s_ds st1 envv envp
+d_p_ds [] envv envp = {-id-} envp
 
---d_p_ds :: DecP -> EnvV -> EnvP -> EnvP  
---s_ds :: Stm -> EnvV -> EnvP -> Store -> Store
+s_ds :: Stm -> EnvV -> EnvP -> Store -> Store
+s_ds (Ass x a1) envv envp = \sto -> update sto (a_val a1 (lookup envv sto)) (envv x)
+s_ds Skip envv envp = id
+s_ds (Comp st1 st2) envv envp = (s_ds st2 envv envp) . (s_ds st1 envv envp)
+s_ds (If b1 st1 st2) envv envp = cond ((b_val b1 . lookup envv), (s_ds st1 envv envp), (s_ds st2 envv envp))
+s_ds (While b1 st1) envv envp = fix ff where
+        ff g = cond ((b_val b1 . lookup envv), (g . (s_ds st1 envv envp)), id)
+s_ds (Block dv dp st1) envv envp = \sto -> s_ds st1 (envv' sto) (envp' sto) (sto' sto) where
+        f s = d_v_ds dv (envv, s)
+        envv' = fst . f
+        envp' = \sto -> d_p_ds dp (envv' sto) envp
+        sto' = snd . f 
+s_ds (Call pn ) envv envp = envp pn
 
+t :: Store
+t 0 = 1
+
+--n :: Int
+--n = s_ds s [] [] t 
 
 evv::Var->Loc
 evv "x" = 0
---evv "h" = 1
---evv x   = (-1)-- Very important : (f x) in update cannot equal undefined
 
 st::Loc->Z
 st 0 = 1 -- Very importan for Testing
---st 1 = 5
---st _ =  -1
 
-bob = d_v_ds [("a",(N 8))] (evv, st)
 
 {-Tests
 =====================================
@@ -157,5 +171,11 @@ test "h"
 test "x"
 5
 test "t"
-undefined   
+undefined 
+
+let bob = d_v_ds [("a",(N 8))] (evv, st)
+(fst bob) "a"
+1
+(snd bob) 1
+8
 -}
