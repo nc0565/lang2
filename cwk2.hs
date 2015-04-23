@@ -6,10 +6,10 @@ import Prelude hiding (lookup)
 
 -- Type Definitions (Given)
 
-data Aexp = N Integer | V Var | Add Aexp Aexp | Mult Aexp Aexp | Sub Aexp Aexp
-data Bexp = TRUE | FALSE | Eq Aexp Aexp | Le Aexp Aexp | Neg Bexp | And Bexp Bexp
+data Aexp = N Integer | V Var | Add Aexp Aexp | Mult Aexp Aexp | Sub Aexp Aexp{- deriving Show-}
+data Bexp = TRUE | FALSE | Eq Aexp Aexp | Le Aexp Aexp | Neg Bexp | And Bexp Bexp{- deriving Show-}
 data Stm  = Ass Var Aexp | Skip | Comp Stm Stm | If Bexp Stm Stm | While Bexp Stm | Block DecV DecP Stm
-        {-| Block DecV Stm -}| Call Pname
+        {-| Block DecV Stm -}| Call Pname{- deriving Show-}
 
 type Var = String
 type Pname = String
@@ -27,8 +27,7 @@ type EnvP = Pname -> Store -> Store
 next = 0
 
 s::Stm
-s = Comp (Ass "x" (N 7)) (inner)
-        where inner = Block [("x", (N 7))] [("p", (Ass "x" (N 0)))] (Comp (Ass "x" (N 5)) (Call "p"))
+s = Block [("x", (N 7))] [("p", (Ass "x" (N 0)))] (Comp (Ass "x" (N 7)) (Block [("x", (N 5))] [{-("p", (Ass "x" (N 0)))-}] (Call "p")))
 
 {-begin
     var x:=7;
@@ -100,7 +99,7 @@ s_ds' (While b1 st1) envv = fix ff where
 
 --check if second arg should be PA?
 d_v_ds :: DecV -> (EnvV, Store) -> (EnvV, Store)    
-d_v_ds ((x, a1):dv') (envv, sto) = d_v_ds dv'((update envv l x), (update (update sto v l) (new next) next)) where
+d_v_ds ((x, a1):dv') (envv, sto) = d_v_ds dv'((update envv l x), (update (update sto v l) (new l) next)) where
         l = sto next
         v = (a_val a1 (lookup envv sto))
 d_v_ds [] (envv, sto) = {-id-} (envv, sto)
@@ -127,11 +126,16 @@ s_ds (Call pn ) envv envp = envp pn
 t :: Store
 t 0 = 1
 
---n :: Int
---n = s_ds s [] [] t 
+-- After evaluation t next is the next contigous free location, so (t next)-1 = n.
+countDecVars :: Stm -> Int
+countDecVars st1 = (fromInteger ((s_ds st1 undefined undefined  t) next)) - 1
 
-evv::Var->Loc
-evv "x" = 0
+n :: Int
+n = countDecVars s
+
+--Testing
+--evv::Var->Loc
+--evv x = next
 
 st::Loc->Z
 st 0 = 1 -- Very importan for Testing
