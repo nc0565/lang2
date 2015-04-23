@@ -2,6 +2,8 @@
 -- Denotational Semantics
 -- CWK2
 
+-- Note that expressions using the fac procedure should provide the EnvV [("x", (N x)), ("y",(N 1))], where x is the input.
+
 import Prelude hiding (lookup)
 
 -- Type Definitions (Given)
@@ -104,9 +106,14 @@ d_v_ds ((x, a1):dv') (envv, sto) = d_v_ds dv'((update envv l x), (update (update
         v = (a_val a1 (lookup envv sto))
 d_v_ds [] (envv, sto) = {-id-} (envv, sto)
 
-d_p_ds :: DecP -> EnvV -> EnvP -> EnvP
+{-d_p_ds :: DecP -> EnvV -> EnvP -> EnvP
 d_p_ds ((pn, st1):dp') envv envp = d_p_ds dp' envv (update envp g pn) where
         g = s_ds st1 envv envp
+d_p_ds [] envv envp = {-id-} envp-}
+
+d_p_ds :: DecP -> EnvV -> EnvP -> EnvP
+d_p_ds ((pn, st1):dp') envv envp = d_p_ds dp' envv (update envp (fix ff) pn) where
+        ff g = s_ds st1 envv (update envp g pn)
 d_p_ds [] envv envp = {-id-} envp
 
 s_ds :: Stm -> EnvV -> EnvP -> Store -> Store
@@ -118,9 +125,9 @@ s_ds (While b1 st1) envv envp = fix ff where
         ff g = cond ((b_val b1 . lookup envv), (g . (s_ds st1 envv envp)), id)
 s_ds (Block dv dp st1) envv envp = \sto -> s_ds st1 (envv' sto) (envp' sto) (sto' sto) where
         f s = d_v_ds dv (envv, s)
-        envv' = fst . f
+        envv' s = fst (f s)
         envp' = \sto -> d_p_ds dp (envv' sto) envp
-        sto' = snd . f 
+        sto' s = snd (f s)
 s_ds (Call pn ) envv envp = envp pn
 
 t :: Store
@@ -133,12 +140,42 @@ countDecVars st1 = (fromInteger ((s_ds st1 undefined undefined  t) next)) - 1
 n :: Int
 n = countDecVars s
 
+f::DecP
+f = [("fac",
+    (Block [("z", (V "x"    ))] []
+        (If (Eq (V "x") (N 1))
+            Skip    
+            (Comp 
+                (Ass "x" 
+                    (Sub (V "x") (N 1))) 
+                (Comp 
+                    (Call "fac") 
+                    (Ass "y" 
+                        (Mult (V "z") (V "y")) {-undefined undefined-})) {-undefined undefined-}) {-undefined undefined-})))]
+
+{-
+proc fac is begin
+    var z:=x;
+    if
+        x=1
+    then
+        skip
+    else
+        (x:= x - 1;
+        call fac;
+        y:=z*y)
+end
+-}
+
+--Test f, from Q.m, with the input x=5.
+testM = (s_ds (Block [("x", (N 5)), ("y",(N 1))] f (Call "fac")) undefined undefined t) ((fst (d_v_ds [("x", (N 5)), ("y",(N 1))] (undefined , t))) "y")
+
 --Testing
 --evv::Var->Loc
 --evv x = next
 
-st::Loc->Z
-st 0 = 1 -- Very importan for Testing
+--st::Loc->Z
+--st 0 = 1 -- Very importan for Testing
 
 
 {-Tests
@@ -182,4 +219,33 @@ let bob = d_v_ds [("a",(N 8))] (evv, st)
 1
 (snd bob) 1
 8
+
+let sto = (snd (d_v_ds [("x", (N 5)), ("y",(N 1))] (undefined , t)))
+let evv = (fst (d_v_ds [("x", (N 5)), ("y",(N 1))] (undefined , t)))
+let evp = ((d_p_ds [("p", (Ass "x" (N 8)))] evv  undefined ) )
+
+
+(s_ds Skip evv evp sto) 1
+5
+(s_ds (Call "p") evv evp sto) 1
+8
+
+let evp = ((d_p_ds [("p", (snd (head f)))] evv  undefined ) )
+
+(s_ds (Ass "x" (N 7)) evv evp sto) 1
+7
+(s_ds (Block [] [] (Ass "x" (N 7))) evv evp sto) 1
+7
+(s_ds (Block [] [("p", (Comp (Ass "y" (N 22)) (Ass "x" (N 5))))] (Call "p")) evv evp sto) 1
+5
+(s_ds (Block [] [("p", (Comp (Ass "y" (N 22)) (Ass "x" (V "y"))))] (Call "p")) evv evp sto) 1
+22
+(s_ds (Block [] f (Ass "x" (N 6))) evv evp sto) 1
+6
+
+(s_ds (Block [] f (Call "fac")) evv evp sto) (evv "x")
+1
+So
+(s_ds (Block [] f (Call "fac")) evv evp sto) (evv "y")
+120
 -}
